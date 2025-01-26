@@ -1,1 +1,15 @@
 <p>home works!</p>
+<div>usuario logeado: </div>
+<h3>email: {{this.usuario.CORREO}}</h3>
+
+
+<div *ngIf="this.usuarioEncontrado">
+<button (click)="cerrarSesion()">Desloguearme</button>
+</div>
+
+<div *ngIf="!this.usuarioEncontrado">
+    <button (click)="iniciarSesion()">Iniciar Sesion</button>
+    <button (click)="registrarme()">Registrarme</button>
+</div>
+
+

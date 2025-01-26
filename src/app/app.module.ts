@@ -14,6 +14,10 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot()
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({"projectId":"utn-juegos-2025","appId":"1:791436188633:web:1b93df6350919f8b6817c8","storageBucket":"utn-juegos-2025.firebasestorage.app","apiKey":"AIzaSyB3igy4Iq4oE_ISio4Gp4P9cobka9I8S8c","authDomain":"utn-juegos-2025.firebaseapp.com","messagingSenderId":"791436188633"})),
