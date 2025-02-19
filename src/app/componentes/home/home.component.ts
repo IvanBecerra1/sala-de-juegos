@@ -1,9 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AutenticacionService } from '../../servicio/autenticacion.service';
-import { Usuaro } from '../../models/clases/Usuario';
+import { Usuario } from '../../models/clases/Usuario';
 import { Router } from '@angular/router';
 import { ERutas } from '../../models/enumerador/ERutas';
 import { user, User } from '@angular/fire/auth';
+import { ChatService } from '../../servicio/chat.service';
+import { FormatoChat } from '../../models/clases/formato-chat';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +15,11 @@ import { user, User } from '@angular/fire/auth';
 export class HomeComponent implements OnInit {
   
   public usuarioEncontrado : any;
-  protected usuario : Usuaro = inject(Usuaro);
+  protected usuario : Usuario = inject(Usuario);
+
   private autenticacion : AutenticacionService = inject(AutenticacionService);
   private router : Router = inject(Router);
+  private chatServicio : ChatService = inject(ChatService);
 
   ngOnInit(): void {
     this.usuarioEncontrado = this.autenticacion.obtenerUsuario();
@@ -31,6 +35,12 @@ export class HomeComponent implements OnInit {
       console.log("(home.component.ts) ERROR DATOS USUARIO: ", error);
 
     })
+
+  }
+
+  
+  inicio(){
+    this.router.navigate([ERutas.HOME]);
   }
 
   iniciarSesion(){
@@ -39,6 +49,15 @@ export class HomeComponent implements OnInit {
   registrarme(){
     this.router.navigate([ERutas.REGISTRO]);
 
+  }
+  ahorcado() {
+    this.router.navigate(["ahorcado"]);
+  }
+  preguntados() {
+    this.router.navigate(["preguntados"]);
+  }
+  mayorMenor() {
+    this.router.navigate(["mayormenor"]);
   }
   cerrarSesion(){
     if (!this.autenticacion.obtenerUsuario()){

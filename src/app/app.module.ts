@@ -17,6 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ChatComponent } from './componentes/chat/chat.component';
+import { MayormenorComponent } from './componentes/juegos/mayormenor/mayormenor.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { ToastrModule } from 'ngx-toastr';
     InicioSesionComponent,
     RegistroComponent,
     AhorcadoComponent,
-    PreguntadosComponent
+    PreguntadosComponent,
+    ChatComponent,
+    MayormenorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
+    HttpClientModule,
     ToastrModule.forRoot()
   ],
   providers: [

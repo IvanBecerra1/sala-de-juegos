@@ -1,0 +1,57 @@
+
+<br><br>
+<div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="row w-100">
+      <div class="col text-center align-self-center">
+        <h3 class="text-primary ">Juego de Mayor-Menor</h3>
+        <h4 class="text-primary">Puntos: {{ this.puntos }} | Vidas: {{this.intentos}}</h4>
+  
+        <!-- Contenedor para las cartas -->
+        <div class="d-flex justify-content-center mt-3">
+          <div class="card mx-2" style="width: 8rem;">
+            <img *ngIf="cartaActual" src="../../../../assets/mayor_menor/0.jpg" class="card-img-top" alt="Carta en mesa">
+          </div>
+  
+          <div class="card mx-2" style="width: 8rem;">
+            <img *ngIf="cartaActual" [src]="cartaActual.image" class="card-img-top" alt="Carta en mesa">
+            <div class="card-body">
+              <h5 class="card-title">{{ cartaActual?.value }} de {{ cartaActual?.suit }}</h5>
+            </div>
+          </div>
+  
+          <div *ngIf="this.nuevaCarta && this.mostrarCargando" class="card mx-2" style="width: 8rem;">
+            <img *ngIf="this.nuevaCarta" [src]="nuevaCarta.image" class="card-img-top" alt="Carta en mesa">
+            <div class="card-body">
+              <h5 class="card-title">{{ nuevaCarta?.value }} de {{ nuevaCarta?.suit }}</h5>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Botones para elegir mayor o menor -->
+        <div class="mt-4">
+              <button class="btn btn-danger" [disabled]="this.mostrarCargando" (click)="adivinar(false)">Menor</button>
+
+            <button class="btn btn-primary me-2" [disabled]="this.mostrarCargando" (click)="adivinar(true)">Mayor</button>
+        </div>
+  
+        <!-- Spinners de carga -->
+        <div *ngIf="this.mostrarCargando" class="mt-3">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+  
+          
+        <!-- Mensaje de resultado -->
+        <div class="mt-3 alert" 
+            [class.alert-success]="mensaje === 'Felicidades ganaste un punto por acertar'" 
+            [class.alert-danger]="mensaje === 'Fallaste!!!!' || this.intentos === 0"
+            *ngIf="mensaje">
+            {{ mensaje }}
+          </div>
+
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

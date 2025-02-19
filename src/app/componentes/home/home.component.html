@@ -1,15 +1,38 @@
-<p>home works!</p>
-<div>usuario logeado: </div>
-<h3>email: {{this.usuario.CORREO}}</h3>
-
-
-<div *ngIf="this.usuarioEncontrado">
-<button (click)="cerrarSesion()">Desloguearme</button>
-</div>
-
-<div *ngIf="!this.usuarioEncontrado">
-    <button (click)="iniciarSesion()">Iniciar Sesion</button>
-    <button (click)="registrarme()">Registrarme</button>
-</div>
-
-
+<!-- Navbar -->
+<nav class="navbar navbar-dark navbar-custom d-flex justify-content-between align-items-center p-3">
+    <span class="navbar-brand mx-3">Sala de Juegos</span>
+    <div>
+      <span class="text-light me-3">Usuario: {{this.usuario.CORREO}}</span>
+      <button *ngIf="this.usuarioEncontrado" class="btn btn-danger btn-sm" (click)="cerrarSesion()">Cerrar Sesión</button>
+      <div *ngIf="!this.usuarioEncontrado" class="d-inline">
+        <button class="btn btn-outline-light btn-sm me-2" (click)="iniciarSesion()">Iniciar Sesión</button>
+        <button class="btn btn-outline-light btn-sm" (click)="registrarme()">Registrarme</button>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Contenedor Principal -->
+  <div class="container mt-4">
+    <!-- Juegos Categoría -->
+    <h2 class="text-primary">Juegos Categoría</h2>
+    <div class="btn-group">
+      <button class="btn btn-outline-primary" (click)="ahorcado()">Ahorcado</button>
+      <button class="btn btn-outline-primary" (click)="inicio()">Home</button>
+      <button class="btn btn-outline-primary" (click)="preguntados()">Preguntados</button>
+      <button class="btn btn-outline-primary" (click)="mayorMenor()">Mayor Menor</button>
+      <button class="btn btn-outline-primary" (click)="preguntados()">Juego Personalizado</button>
+    </div>
+  
+    <!-- Juego Seleccionado -->
+    <h2 class="mt-4 text-success">Juego Seleccionado:</h2>
+    <div class="juego-container p-3">
+      <router-outlet></router-outlet>
+    </div>
+  
+    <!-- Chat -->
+    <h3 class="mt-4 text-warning">Chat Online</h3>
+    <div class="chat-container p-3">
+      <app-chat></app-chat>
+    </div>
+  </div>
+  
