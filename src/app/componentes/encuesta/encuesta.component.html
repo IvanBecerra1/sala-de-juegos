@@ -1,0 +1,48 @@
+
+<form [formGroup]="formularioEncuesta" (ngSubmit)="enviarEncuesta()" class="formulario-encuesta">
+  <h3>Datos personales</h3>
+  <div class="grid-formulario">
+    <div class="columna">
+      <label>Nombre y Apellido:</label>
+      <input type="text" formControlName="nombre" placeholder="Ingresa tu nombre y apellido" />
+      <div *ngIf="formularioEncuesta.get('nombre')?.invalid && formularioEncuesta.get('nombre')?.touched">
+        Campo requerido.
+      </div>
+
+      <label>Edad:</label>
+      <input type="number" formControlName="edad" placeholder="Ingresa tu edad" />
+      <div *ngIf="formularioEncuesta.get('edad')?.invalid && formularioEncuesta.get('edad')?.touched">
+        Edad inválida (18-99).
+      </div>
+
+      <label>Teléfono:</label>
+      <input type="text" formControlName="telefono" placeholder="Ingresa tu número de teléfono" />
+      <div *ngIf="formularioEncuesta.get('telefono')?.invalid && formularioEncuesta.get('telefono')?.touched">
+        Solo números, hasta 10 caracteres.
+      </div>
+    </div>
+
+    <div class="columna">
+      <h3>Encuesta</h3>
+
+      <label>¿Te gustaría volver a jugar esta app en el futuro?</label><br />
+      <label><input type="radio" value="Sí, definitivamente" formControlName="jugarFuturo" /> Sí, definitivamente</label><br />
+      <label><input type="radio" value="Tal vez" formControlName="jugarFuturo" /> Tal vez</label><br />
+      <label><input type="radio" value="No" formControlName="jugarFuturo" /> No</label><br />
+
+      <label>¿Qué juego te pareció más difícil?</label>
+      <select formControlName="juegoDificil">
+        <option value="Ahorcado">Ahorcado</option>
+        <option value="Mayor o Menor">Mayor o Menor</option>
+        <option value="Preguntados">Preguntados</option>
+        <option value="Matemáticas">Matemáticas</option>
+      </select>
+
+      <label>¿Recomendarías esta app a otras personas?</label><br />
+      <label><input type="checkbox" formControlName="recomendar" value="Sí" /> Sí</label>
+      <label><input type="checkbox" formControlName="recomendar" value="No" /> No</label>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="formularioEncuesta.invalid">Enviar encuesta</button>
+</form>

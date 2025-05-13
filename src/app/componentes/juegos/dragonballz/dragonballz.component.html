@@ -1,0 +1,33 @@
+<div class="text-center">
+    <h2>🧠 ¿Quién es este personaje?</h2>
+  
+    <div *ngIf="personajeActual">
+        <img
+          [src]="personajeActual.image"
+          alt="Personaje"
+          [ngStyle]="{ filter: !mostrarRespuesta ? 'blur(10px)' : 'none' }"
+          width="300"
+        />
+
+        
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button
+          *ngFor="let opcion of opciones"
+          class="btn"
+          [ngClass]="{
+            'btn-success': respuestaSeleccionada === opcion && opcion === personajeActual.name,
+            'btn-danger': respuestaSeleccionada === opcion && opcion !== personajeActual.name,
+            'btn-outline-primary': !respuestaSeleccionada
+          }"
+          [disabled]="respuestaSeleccionada"
+          (click)="seleccionar(opcion)"
+        >
+          {{ opcion }}
+        </button>
+      </div>
+      </div>
+
+  
+    <p class="mt-3">Puntaje: {{ puntos }}</p>
+  </div>
+  

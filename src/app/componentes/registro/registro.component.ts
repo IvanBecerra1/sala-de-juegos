@@ -67,5 +67,7 @@ export class RegistroComponent {
       this.toastr.error(texto, EAutenticacion.REGISTRO_TITULO);
 
   }
-
+  volver() {
+    this.router.navigate(['/']);
+  }
 }

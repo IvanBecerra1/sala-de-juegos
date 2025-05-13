@@ -1,0 +1,89 @@
+.formulario-encuesta {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  h3 {
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .grid-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .columna label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: white;
+  }
+  
+  div[ngIf] {
+    color: #ff7b7b;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  
+  button[type="submit"] {
+    margin-top: 32px;
+    width: 100%;
+    background-color: #673ab7;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[disabled] {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+  }
+  
+  button[type="submit"]:hover:enabled {
+    background-color: #5e35b1;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .grid-formulario {
+      grid-template-columns: 1fr;
+    }
+  }
+  

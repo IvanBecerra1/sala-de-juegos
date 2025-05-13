@@ -9,7 +9,7 @@ import { ChatService } from '../../servicio/chat.service';
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent implements OnInit {
-  usuario: Usuario = new Usuario(); // Aquí debes inicializar con los datos del usuario actual
+  usuario: Usuario = new Usuario(); 
   mensaje: string = '';
   mensajes: FormatoChat[] = [];
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
@@ -42,8 +42,8 @@ export class ChatComponent implements OnInit {
         this.usuario.ULTIMA_CONEXION = new Date();
         let formato : FormatoChat = new FormatoChat(this.usuario, this.mensaje);
         await this.chatServic.guardarMensaje(formato);
-        this.mensaje = ''; // Limpiamos el campo de mensaje después de enviarlo
-        await this.cargarMensajes(); // Volvemos a cargar los mensajes para actualizar la lista
+        this.mensaje = ''; 
+        await this.cargarMensajes();
 
       }
     } catch (error) {

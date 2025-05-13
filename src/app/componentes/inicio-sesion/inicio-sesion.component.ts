@@ -64,6 +64,9 @@ export class InicioSesionComponent {
       this.toastr.error(texto, EAutenticacion.INICIO_SESION_TITULO)
   }
   
+  volver() {
+    this.router.navigate(['/']);
+  }
   public llenarDatosRapidos(){
     this.correo = "becerraivan79@gmail.com";
     this.clave = "1234567890";

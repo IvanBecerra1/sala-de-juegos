@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PreguntadosService } from '../../../servicio/preguntados.service';
 import { IPais } from '../../../models/interfaces/ipais';
+import { GuardarResultadoService } from '../../../servicio/guardar-resultado.service';
 
 @Component({
   selector: 'app-preguntados',
@@ -9,7 +10,7 @@ import { IPais } from '../../../models/interfaces/ipais';
   
 })
 export class PreguntadosComponent implements OnInit {
-
+  private resultadosServicios : GuardarResultadoService = inject(GuardarResultadoService);
   private paisServicio : PreguntadosService = inject(PreguntadosService);
 
   public preguntas : any[] = [];
@@ -17,14 +18,13 @@ export class PreguntadosComponent implements OnInit {
   public respuestaSeleccionada : string | null = null;
   public puntos : number = 0;
   public mostrarResultado : boolean = false;
-
+  public vidas = 3;
 
   ngOnInit(): void {
     this.iniciarPreguntados();
   }
 
   iniciarPreguntados() {
-
     this.paisServicio.obtenerPais().subscribe(pais =>{
       this.preguntas = this.generarPreguntas(pais);
     });
@@ -55,13 +55,18 @@ export class PreguntadosComponent implements OnInit {
   }
 
 
-  seleccionarOpcion(opcion : string){
+  async seleccionarOpcion(opcion : string){
     this.respuestaSeleccionada = opcion;
 
     if (opcion === this.preguntas[this.preguntaActual].pais.nombre) {
       this.puntos++;
     }
-    setTimeout(() => this.siguientePregunta(), 1000); // Puse 1000ms (1s) por ejemplo
+    else {
+      this.vidas--;
+
+      await this.mostrarResultados();
+    }
+    setTimeout(() => this.siguientePregunta(), 1000); 
 
   }
 
@@ -77,12 +82,36 @@ export class PreguntadosComponent implements OnInit {
     
   }
 
-  reiniciarJuego(){
-    this.preguntaActual = 0;
-    this.puntos = 0;
+  async mostrarResultados(){
+    if (this.vidas){
+      return;
+    }
+    await this.resultadosServicios.procesoGuardado(this.puntos, "preguntados");;
+    this.mostrarResultado = true;
+    this.vidas = 3;
+    console.log("puntos guardados: " + this.puntos);
+  }
+  async reiniciarJuego(){
     this.mostrarResultado = false;
-    
+    this.puntos = 0;
+    this.preguntaActual = 0;
     this.respuestaSeleccionada = null;
     this.iniciarPreguntados();
+  }
+
+  obtenerClaseBoton(opcion: string): string {
+    if (!this.respuestaSeleccionada) {
+      return 'btn btn-primary';
+    }
+  
+    if (opcion === this.preguntas[this.preguntaActual].pais.nombre) {
+      return 'btn btn-success';
+    }
+  
+    if (opcion === this.respuestaSeleccionada && opcion !== this.preguntas[this.preguntaActual].pais.nombre) {
+      return 'btn btn-danger';
+    }
+  
+    return 'btn btn-secondary'; 
   }
 }

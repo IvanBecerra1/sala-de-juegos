@@ -1,37 +1,76 @@
-body {
-    background-color: #f8f9fa; /* Fondo gris claro */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+
+.navbar-game {
+  background-color: rgba(104, 1, 97, 0.37) !important;
+  color: white;
+}
+.game-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.game-area {
+  max-width: 700px;
+  width: 90%;
+  margin: 20px auto; 
+  height: 500px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1); 
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center; 
+}
+
+.chat-area {
+  border: 2px solid #f44336;
+  background-color: #ffebee;
+  padding: 16px;
+  border-radius: 8px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .main-container {
+    flex-direction: column;
   }
-  
-  .navbar-custom {
-    background-color: #343a40; /* Color oscuro */
-    padding: 10px;
-  }
-  
-  .btn-juego {
-    margin: 5px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-juego:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .juego-container {
-    border: 2px solid #007bff;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .chat-container {
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    padding: 10px;
-    background-color: white;
-    border-radius: 10px;
-  }
-  
+}
+
+
+.game-area img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+ngb-carousel {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}.slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.juego-titulo {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}

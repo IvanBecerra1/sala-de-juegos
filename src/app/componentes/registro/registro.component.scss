@@ -1,0 +1,78 @@
+.registro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+  
+  .registro-box {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 32px;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .titulo-registro {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+  
+  .subtitulo {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 24px;
+  }
+  
+  .icono-registro {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  .formulario-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .formulario-registro label {
+    text-align: left;
+    font-weight: 500;
+  }
+  
+  .formulario-registro input {
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+  }
+  
+  .formulario-registro input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .formulario-registro button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #673ab7;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .formulario-registro button:hover {
+    background-color: #5e35b1;
+  }
+  

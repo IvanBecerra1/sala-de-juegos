@@ -9,14 +9,14 @@ export class FormatoChat {
     constructor(usuario: Usuario, mensaje: string) {
         this.usuario = usuario;
         this.mensaje = mensaje;
-        this.fecha = new Date(); // Inicializa la fecha actual
+        this.fecha = new Date(); 
     }
     
     toFirestore(): any {
         return {
-          usuario: this.usuario.toFirestore(), // Asegúrate de que "usuario" también sea un objeto plano
+          usuario: this.usuario.toFirestore(), 
           mensaje: this.mensaje,
-          fecha: this.fecha.toISOString() // Convierte la fecha a un formato serializable
+          fecha: this.fecha.toISOString()
         };
       }
 

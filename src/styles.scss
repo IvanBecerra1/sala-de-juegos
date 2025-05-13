@@ -2,3 +2,46 @@
 // regular style toast
 
 @import 'ngx-toastr/toastr';
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('assets/fondo.jpg');
+    background-size: cover;         /* para que cubra toda la pantalla */
+    background-position: center;    /* centrado */
+    background-repeat: no-repeat;   /* sin repetirse */
+    background-attachment: fixed;   /* fondo fijo al hacer scroll */
+    color: black
+  }
+
+  .boton-letra {
+    margin: 5px;
+    min-width: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .boton-letra:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .boton-reiniciar {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .boton-reiniciar:hover {
+    background-color: #ffcc00;
+    transform: scale(1.05);
+  }
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

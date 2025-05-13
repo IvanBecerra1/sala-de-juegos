@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MayormenorService } from '../../../servicio/mayormenor.service';
+import { GuardarResultadoService } from '../../../servicio/guardar-resultado.service';
 
 @Component({
   selector: 'app-mayormenor',
@@ -19,7 +20,7 @@ export class MayormenorComponent implements OnInit{
 
   
   public cartaServicio = inject(MayormenorService);
-
+  private resultadoServicio : GuardarResultadoService = inject(GuardarResultadoService);
   
   ngOnInit(): void {
     this.obtenerNuevoMazo();
@@ -82,7 +83,7 @@ export class MayormenorComponent implements OnInit{
     this.mostrarCargando = false;
 
     if (this.intentos === 0){
-      this.puntos = 0;
+      this.puntos = await this.resultadoServicio.procesoGuardado(this.puntos, "mayorMenor");
       this.intentos = 3;
     }
     this.cartaActual = this.nuevaCarta;

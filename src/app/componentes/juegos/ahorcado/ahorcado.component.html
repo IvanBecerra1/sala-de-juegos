@@ -1,29 +1,29 @@
-<div class="container">
+
+<div class="container  contenedor-ahorcado">
     <meta charset="utf-8" />
     <div class="row">
         <div class="col text-center">
-            <h1 class="text-primary">Juego del Ahorcado</h1>
-            <h2 class="text-primary">Veces ganadas: {{ ahorcadoService.obtenerPuntos() }}</h2>
+            <h1 class="text-white">Juego del Ahorcado</h1>
         </div>
     </div>
 
     <div class="row">
-        <div class="col text-center">
+        <div class="col text-center" *ngIf="!(gano || perdio)">
             <img [src]="'assets/' + intentos + '.png'" class="ahorcado-img" alt="Perdiste!!! Estás Ahorcado!!!"
                 title="Perdiste!!! Estás Ahorcado!!!" height="300" width="300" />
-            <h3>Intentos: <small>{{ intentos }} / 9 </small></h3>
+            <h3 class="text-white">Intentos: <small>{{ intentos }} / 9 </small></h3>
         </div>
     </div>
 
     <div class="row">
         <div class="col text-center">
-            <h1>{{ palabraOculta }}</h1>
+            <h1 class="text-white">{{ palabraOculta }}</h1>
         </div>
     </div>
 
     <div class="row" *ngIf="!gano && !perdio">
         <div class="col text-center">
-            <button (click)="comprobar(letra)" *ngFor="let letra of letras" class="btn btn-primary">
+            <button (click)="comprobar(letra)" [disabled]="letrasUsadas.includes(letra)" *ngFor="let letra of letras" class="btn btn-primary boton-letra">
                 {{ letra.toUpperCase() }}
             </button>
         </div>
@@ -31,20 +31,31 @@
 
     <div class="row" *ngIf="gano">
         <div class="col text-center">
-            <h1 class="text-success">¡Felicidades! ¡Ganaste! 😀</h1>
+            <h1 class="text-success">Felicidades! Ganaste!</h1>
+            
+            <h2 class="text-white">Puntos ganados: {{ this.puntosGanados }}</h2>
+            
+    <div class="row">
+        <div class="col text-center">
+            <h1>Reiniciando juego {{this.tiempoRestante}}</h1>
+        </div>
+    </div>
         </div>
     </div>
 
     <div class="row" *ngIf="perdio">
         <div class="col text-center">
-            <h3 class="text-danger">Lo siento 😢 ¡Perdiste!</h3>
+            <h3 class="text-danger">Lo siento ¡Perdiste!</h3>
             <h4 class="text-success">La palabra correcta era: {{ ahorcadoService.obtenerPalabra() }}</h4>
+            
+            <h2 class="text-white">Puntos ganados: {{ this.puntosGanados }}</h2>
+            
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="text-white">Reiniciando juego {{this.tiempoRestante}}</h1>
+        </div>
+    </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col text-center">
-            <button (click)="reiniciarJuego()" class="btn btn-warning">Reiniciar Juego</button>
-        </div>
-    </div>
 </div>

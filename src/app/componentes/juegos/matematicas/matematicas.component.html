@@ -1,0 +1,21 @@
+<div class="container mt-4 text-center text-white" *ngIf="!juegoFinalizado; else finalizado">
+    <h2>Agilidad mental</h2>
+    <p><strong>Tiempo restante:</strong> {{ tiempoRestante }} segundos</p>
+    <p><strong>Puntos:</strong> {{ puntos }}</p>
+  
+    <div class="mb-3">
+      <h3>{{ numero1 }} {{ operador }} {{ numero2 }} = ?</h3>
+      <input type="number" [(ngModel)]="respuestaUsuario" class="form-control" />
+    </div>
+  
+    <button class="btn btn-primary" (click)="verificarRespuesta()">Responder</button>
+  </div>
+  
+  <ng-template #finalizado>
+    <div class="text-center mt-5 text-white">
+      <h2 class="text-white">Se acabo tu tiempo, tu mayor puntaje es</h2>
+      <h1>{{ puntos }}</h1>
+      <button class="btn btn-success" (click)="reiniciarJuego()">Jugar de nuevo</button>
+    </div>
+  </ng-template>
+  

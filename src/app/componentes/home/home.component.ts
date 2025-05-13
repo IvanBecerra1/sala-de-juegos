@@ -6,7 +6,6 @@ import { ERutas } from '../../models/enumerador/ERutas';
 import { user, User } from '@angular/fire/auth';
 import { ChatService } from '../../servicio/chat.service';
 import { FormatoChat } from '../../models/clases/formato-chat';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,7 +19,13 @@ export class HomeComponent implements OnInit {
   private autenticacion : AutenticacionService = inject(AutenticacionService);
   private router : Router = inject(Router);
   private chatServicio : ChatService = inject(ChatService);
-
+  imagenes = [
+    { src: 'assets/ahorcado.png', ruta: 'ahorcado' },
+    { src: 'assets/cartas.jpg', ruta: 'mayormenor' },
+    { src: 'assets/quiz-matematica.jpg', ruta: 'matematicas' },
+    { src: 'assets/quiz-paises.jpg', ruta: 'preguntados' }
+  ];
+  
   ngOnInit(): void {
     this.usuarioEncontrado = this.autenticacion.obtenerUsuario();
 
@@ -38,7 +43,10 @@ export class HomeComponent implements OnInit {
 
   }
 
-  
+  navegarA(ruta: string) {
+    this.router.navigate([ruta]);
+  }
+
   inicio(){
     this.router.navigate([ERutas.HOME]);
   }
@@ -59,6 +67,12 @@ export class HomeComponent implements OnInit {
   mayorMenor() {
     this.router.navigate(["mayormenor"]);
   }
+  matematicas() {
+    this.router.navigate(["matematicas"]);
+  }
+  encuesta() {
+    this.router.navigate(["envuesta-v2"]);
+  }
   cerrarSesion(){
     if (!this.autenticacion.obtenerUsuario()){
       console.log("No hay sesion iniciada");
@@ -73,5 +87,15 @@ export class HomeComponent implements OnInit {
       console.log("(homeComponent.ts) error : ", error);
     });
 
+  }
+  jugar(rutaJuego: string) {
+    this.router.navigate([rutaJuego]);
+  }
+  mostrarCerrarJuego() : boolean {
+    return this.router.url !== "/" 
+
+  }
+  mostrarCarrusel(): boolean {
+    return this.router.url === '/' || this.router.url === '/home';
   }
 }

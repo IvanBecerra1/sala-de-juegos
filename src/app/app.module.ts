@@ -20,7 +20,19 @@ import { ToastrModule } from 'ngx-toastr';
 import { ChatComponent } from './componentes/chat/chat.component';
 import { MayormenorComponent } from './componentes/juegos/mayormenor/mayormenor.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DragonballzComponent } from './componentes/juegos/dragonballz/dragonballz.component';
+import { MatematicasComponent } from './componentes/juegos/matematicas/matematicas.component';
+import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { CerrarJuegoComponent } from './componentes/cerrar-juego/cerrar-juego.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
+registerLocaleData(localeEs);
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,21 +43,30 @@ import { HttpClientModule } from '@angular/common/http';
     AhorcadoComponent,
     PreguntadosComponent,
     ChatComponent,
-    MayormenorComponent
+    MayormenorComponent,
+    DragonballzComponent,
+    MatematicasComponent,
+    EncuestaComponent,
+    CerrarJuegoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    MatToolbarModule,
+    MatButtonModule,
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({"projectId":"utn-juegos-2025","appId":"1:791436188633:web:1b93df6350919f8b6817c8","storageBucket":"utn-juegos-2025.firebasestorage.app","apiKey":"AIzaSyB3igy4Iq4oE_ISio4Gp4P9cobka9I8S8c","authDomain":"utn-juegos-2025.firebaseapp.com","messagingSenderId":"791436188633"})),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideAnimationsAsync(),
+    { provide: LOCALE_ID, useValue: 'es' }
   ],
   bootstrap: [AppComponent]
 })
