@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from '../../models/clases/Usuario';
 import { FormatoChat } from '../../models/clases/formato-chat';
 import { ChatService } from '../../servicio/chat.service';
+import { AutenticacionService } from '../../servicio/autenticacion.service';
 
 @Component({
   selector: 'app-chat',
@@ -9,59 +10,54 @@ import { ChatService } from '../../servicio/chat.service';
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent implements OnInit {
-  usuario: Usuario = new Usuario(); 
+  usuario: Usuario | null = new Usuario(); 
   mensaje: string = '';
   mensajes: FormatoChat[] = [];
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
 
-  constructor(private chatServic: ChatService) {}
+  constructor(private chatServic: ChatService, private autenticacion : AutenticacionService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    /*
+    this.usuario.CORREO = "test@test.com";
+    this.usuario.UID = "asdasdasdas";
+    this.usuario.FECHA_REGISTRO = new Date();
+    this.usuario.ULTIMA_CONEXION = new Date();*/
 
-    // cargar datos del usuario!
+    this.usuario = await this.autenticacion.obtenerDatosUsuario();
     
-    this.cargarMensajes();
-  }
-
-  async cargarMensajes() {
-    try {
-      this.mensajes = await this.chatServic.cargarMensajes();
-    } catch (error) {
-      console.error("Error al cargar mensajes:", error);
-    }
+    console.log(this.usuario);
+    this.chatServic.escucharMensajes((mensajes: FormatoChat[]) => {
+      this.mensajes = mensajes;
+      setTimeout(() => this.scrollToBottom(), 100);
+    });
   }
 
   async enviarMensaje() {
     try {
-      if (this.mensaje.trim() !== '') {
+      if (this.mensaje.trim() !== '' ) {
+        let auxMensaje = this.mensaje;
+        const formato = new FormatoChat(this.usuario!, auxMensaje);
+        this.mensaje = ''; // Limpiar campo
 
-        this.usuario.CORREO = "test@test.com";
-
-        this.usuario.UID = "asdasdasdas";
-        this.usuario.FECHA_REGISTRO = new Date();
-        this.usuario.ULTIMA_CONEXION = new Date();
-        let formato : FormatoChat = new FormatoChat(this.usuario, this.mensaje);
         await this.chatServic.guardarMensaje(formato);
-        this.mensaje = ''; 
-        await this.cargarMensajes();
-
       }
     } catch (error) {
       console.error("Error al enviar el mensaje:", error);
     }
   }
 
-  ngAfterViewInit() {
-    this.scrollToBottom();
-  }
-  
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
-  
   scrollToBottom(): void {
     try {
       this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-    } catch (err) { }
+    } catch (err) {}
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
   }
 }

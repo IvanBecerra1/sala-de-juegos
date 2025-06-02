@@ -1,9 +1,9 @@
 
 <div class="contenedor-juego">
-<div class="container  d-flex flex-column justify-content-center align-items-center">
-    <div class="row">
+<div class="container  d-flex flex-column justify-content-center align-items-center " >
+    <div class="row" *ngIf="!mostrarResultado">
       <div class="col text-center align-self-center">
-        <h3 class="text-primary ">Juego de Mayor-Menor</h3>
+        <h3 class="text-primary ">Juego de Mayor - Menor</h3>
         <h4 class="text-primary">Puntos: {{ this.puntos }} | Vidas: {{this.intentos}}</h4>
   
         <div class="d-flex justify-content-center mt-3">
@@ -47,5 +47,14 @@
   
       </div>
     </div>
+
+    
+   <div class="container text-center text-white" *ngIf="mostrarResultado">
+    <h2>Juego finalizado! puntos ganados: {{puntos}} </h2>
+    <button class="btn btn-primary boton-reiniciar" (click)="reiniciarJuego()">Jugar de nuevo</button>
   </div>
+
+
+  </div>
+
 </div>

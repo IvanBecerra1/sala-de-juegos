@@ -31,6 +31,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { ModalResultadoComponent } from './componentes/modal-resultado/modal-resultado.component';
+import { TopJugadoresComponent } from './componentes/top-jugadores/top-jugadores.component';
+import { NavbarComponent } from './componentes/navbar/navbar.component';
 
 registerLocaleData(localeEs);
 @NgModule({
@@ -47,7 +50,10 @@ registerLocaleData(localeEs);
     DragonballzComponent,
     MatematicasComponent,
     EncuestaComponent,
-    CerrarJuegoComponent
+    CerrarJuegoComponent,
+    ModalResultadoComponent,
+    TopJugadoresComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

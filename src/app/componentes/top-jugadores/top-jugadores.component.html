@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+<div class="ranking-container fondo-oscuro">
+
+  <h1 class="titulo-principal">Ranking Top 5</h1>
+
+  <div class="botones-juegos">
+    <button (click)="juegoActual = 'ahorcado'" [class.activo]="juegoActual === 'ahorcado'">Ahorcado</button>
+    <button (click)="juegoActual = 'mayor_menor'" [class.activo]="juegoActual === 'mayor_menor'">Mayor o Menor</button>
+    <button (click)="juegoActual = 'preguntados'" [class.activo]="juegoActual === 'preguntados'">Preguntados</button>
+    <button (click)="juegoActual = 'matematicas'" [class.activo]="juegoActual === 'matematicas'">Matemáticas</button>
+  </div>
+
+  <div *ngIf="juegoActual === 'ahorcado'">
+    <h2 class="titulo">Ahorcado</h2>
+    <p class="subtitulo">Top 5</p>
+    <div class="tabla-ranking">
+      <div class="fila encabezado">
+        <div class="col">Fecha</div>
+        <div class="col">Usuario</div>
+        <div class="col">Puntos</div>
+      </div>
+      <div class="fila" *ngFor="let jugador of listaTop15Ahorcado">
+        <div class="col">{{ jugador.fecha }}</div>
+        <div class="col">{{ jugador.usuario }}</div>
+        <div class="col">{{ jugador.puntos }} pts.</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="juegoActual === 'mayor_menor'">
+    <h2 class="titulo">Mayor o Menor</h2>
+    <p class="subtitulo">Top 5</p>
+    <div class="tabla-ranking">
+      <div class="fila encabezado">
+        <div class="col">Fecha</div>
+        <div class="col">Usuario</div>
+        <div class="col">Puntos</div>
+      </div>
+      <div class="fila" *ngFor="let jugador of listaTop15MayorMenor">
+        <div class="col">{{ jugador.fecha }}</div>
+        <div class="col">{{ jugador.usuario }}</div>
+        <div class="col">{{ jugador.puntos }} pts.</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="juegoActual === 'preguntados'">
+    <h2 class="titulo">Preguntados</h2>
+    <p class="subtitulo">Top 5 </p>
+    <div class="tabla-ranking">
+      <div class="fila encabezado">
+        <div class="col">Fecha</div>
+        <div class="col">Usuario</div>
+        <div class="col">Puntos</div>
+      </div>
+      <div class="fila" *ngFor="let jugador of listaTop15Preguntados">
+        <div class="col">{{ jugador.fecha }}</div>
+        <div class="col">{{ jugador.usuario }}</div>
+        <div class="col">{{ jugador.puntos }} pts.</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="juegoActual === 'matematicas'">
+    <h2 class="titulo">Matemáticas</h2>
+    <p class="subtitulo">Top 5</p>
+    <div class="tabla-ranking">
+      <div class="fila encabezado">
+        <div class="col">Fecha</div>
+        <div class="col">Usuario</div>
+        <div class="col">Puntos</div>
+      </div>
+      <div class="fila" *ngFor="let jugador of listaTop15Matematicas">
+        <div class="col">{{ jugador.fecha }}</div>
+        <div class="col">{{ jugador.usuario }}</div>
+        <div class="col">{{ jugador.puntos }} pts.</div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -14,7 +14,12 @@ export class FormatoChat {
     
     toFirestore(): any {
         return {
-          usuario: this.usuario.toFirestore(), 
+          usuario: {
+            CORREO: this.usuario.CORREO,
+            UID: "test",
+            FECHA_REGISTRO: this.usuario.FECHA_REGISTRO,
+            ULTIMA_CONEXION: this.usuario.ULTIMA_CONEXION
+          }, 
           mensaje: this.mensaje,
           fecha: this.fecha.toISOString()
         };

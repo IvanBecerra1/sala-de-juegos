@@ -43,7 +43,7 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
   }
 
   async comprobar(letra: string) {
-    if (this.letrasUsadas.includes(letra)) return; // prevención doble clic
+    if (this.letrasUsadas.includes(letra)) return; 
     this.letrasUsadas.push(letra);
   
     const acierto = this.ahorcadoService.comprobarLetra(letra);
@@ -57,11 +57,14 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
     }
   
     if (this.gano) {
+      await this.resultadoServicio.procesoGuardado(this.puntosGanados, "ahorcado");
+      console.log("PUNTOS GUARDADOS");
       this.puntosGanados += 35;
     }
   
     if (this.perdio) {
-      this.puntosGanados = await this.resultadoServicio.procesoGuardado(this.puntosGanados, "ahorcado");
+      await this.resultadoServicio.procesoGuardado(this.puntosGanados, "ahorcado");
+      console.log("PUNTOS GUARDADOS");
       this.puntosGanados = 0;
       
     }

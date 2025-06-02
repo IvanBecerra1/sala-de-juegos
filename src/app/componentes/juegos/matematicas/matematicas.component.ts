@@ -16,7 +16,9 @@ export class MatematicasComponent implements OnInit, OnDestroy {
   tiempoRestante: number = 30;
   intervalo: any;
   juegoFinalizado: boolean = false;
-
+  bloqueado: boolean = false;
+  mensajeError: string = '';
+  opciones: number[] = [];
   private resultadoServicio : GuardarResultadoService  = inject(GuardarResultadoService);
 
   ngOnInit(): void {
@@ -45,6 +47,15 @@ export class MatematicasComponent implements OnInit, OnDestroy {
     this.numero1 = this.obtenerNumeroAleatorio();
     this.numero2 = this.obtenerNumeroAleatorio();
     this.operador = operadores[Math.floor(Math.random() * operadores.length)];
+
+    const resultadoCorrecto = this.calcularResultado();
+    let resultadoIncorrecto = resultadoCorrecto;
+
+    while (resultadoIncorrecto === resultadoCorrecto) {
+      resultadoIncorrecto = resultadoCorrecto + (Math.floor(Math.random() * 10) - 5);
+    }
+
+    this.opciones = [resultadoCorrecto, resultadoIncorrecto].sort(() => Math.random() - 0.5);
   }
 
   obtenerNumeroAleatorio(): number {
@@ -60,13 +71,24 @@ export class MatematicasComponent implements OnInit, OnDestroy {
     }
   }
 
-  verificarRespuesta() {
-    if (this.respuestaUsuario === this.calcularResultado()) {
+  
+  verificarRespuesta(respuestaSeleccionada: number) {
+    if (respuestaSeleccionada === this.calcularResultado()) {
       this.puntos += 10;
+      this.mensajeError = '';
+      this.nuevaPregunta();
+    } else {
+      this.mensajeError = '❌ Fallaste, debes esperar 5 segundos';
+      this.bloqueado = true;
+
+      setTimeout(() => {
+        this.bloqueado = false;
+        this.mensajeError = '';
+        this.nuevaPregunta();
+      }, 5000);
     }
-    this.respuestaUsuario = null;
-    this.nuevaPregunta();
   }
+
 
   reiniciarJuego() {
     this.puntos = 0;

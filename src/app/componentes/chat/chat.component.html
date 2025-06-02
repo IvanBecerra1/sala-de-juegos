@@ -1,10 +1,12 @@
+<app-navbar></app-navbar>
 <!-- chat.component.html -->
 <div class="chat-container">
   <div class="chat-box">
     <div #messagesContainer class="messages">
-      <div *ngFor="let msg of mensajes" class="message">
-        <div class="message-header">
-          <span class="user">{{ msg.usuario.CORREO }}</span>
+     <div *ngFor="let msg of mensajes" 
+          [ngClass]="{'message': true, 'own-message': msg.usuario.CORREO === usuario!.CORREO}">
+        <div class="message-header" >
+          <span class="user" *ngIf="msg.usuario.CORREO !== usuario!.CORREO">{{ msg.usuario.CORREO }}</span>
           <small class="timestamp">{{ msg.fecha | date: 'medium' }}</small>
         </div>
         <p class="message-body">{{ msg.mensaje }}</p>
@@ -12,8 +14,8 @@
     </div>
 
     <div class="message-input">
-      <textarea [(ngModel)]="mensaje" placeholder="Escribe tu mensaje"></textarea>
-      <button (click)="enviarMensaje()" [disabled]="!mensaje.trim()">Enviar</button>
+      <textarea [(ngModel)]="mensaje" placeholder="Escribe tu mensaje"  (keydown.enter)="enviarMensaje(); $event.preventDefault()"></textarea>
+      <button (click)="enviarMensaje()" [disabled]="!mensaje.trim()" >Enviar</button>
     </div>
   </div>
 </div>

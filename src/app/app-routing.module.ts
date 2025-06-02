@@ -12,10 +12,17 @@ import { DragonballzComponent } from './componentes/juegos/dragonballz/dragonbal
 import { MatematicasComponent } from './componentes/juegos/matematicas/matematicas.component';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
+import { authGuard } from './guards/auth.guard';
+import { authJuegosGuard } from './guards/auth-juegos.guard';
+import { authEncuestaGuard } from './guards/auth-encuesta.guard';
+import { TopJugadoresComponent } from './componentes/top-jugadores/top-jugadores.component';
 
 const routes: Routes = [
   {
-    path: ERutas.HOME, component: HomeComponent, children: [
+    path: ERutas.HOME,
+    component: HomeComponent,
+    canActivateChild: [authJuegosGuard],
+    children: [
       { path: ERutas.AHORCADO, component: AhorcadoComponent },
       { path: ERutas.PREGUNTADOS, component: PreguntadosComponent },
       { path: ERutas.MAYORMENOR, component: MayormenorComponent },
@@ -24,9 +31,10 @@ const routes: Routes = [
   },
   { path: ERutas.REGISTRO, component: RegistroComponent },
   { path: ERutas.INICIO_SESION, component: InicioSesionComponent },
-  { path: ERutas.ENCUESTA, component: EncuestaComponent },
+  { path: ERutas.ENCUESTA, component: EncuestaComponent, canActivate: [authEncuestaGuard] },
   { path: ERutas.QUIEN_SOY, component: QuienSoyComponent },
-  { path: ERutas.CHAT, component: ChatComponent },
+  { path: ERutas.CHAT, component: ChatComponent, canActivate: [authGuard] },
+  { path: "ranking", component: TopJugadoresComponent },
   { path: '**', redirectTo: ERutas.HOME, pathMatch: 'full' }
 ];
 

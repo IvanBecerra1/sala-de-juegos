@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { docData, Firestore } from '@angular/fire/firestore'; 
-import { collection, addDoc, setDoc, doc, getDoc, updateDoc, Timestamp, serverTimestamp, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { FormatoChat } from '../models/clases/formato-chat';
 
 @Injectable({
@@ -43,5 +43,21 @@ export class ChatService {
     } catch (error) {
       throw error;
     }
+  }
+
+  public escucharMensajes( callback: ( mensajes: FormatoChat[] ) => void ) : void {
+    const refColeccion = collection(this.firestore, ChatService.COLECCION_CHAT);
+    const mensajesQuery = query(refColeccion, orderBy('fecha', 'asc'));
+
+    onSnapshot(mensajesQuery, (snapshot) => {
+      const mensajes: FormatoChat[] = [];
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        mensajes.push(data as FormatoChat);
+      });
+
+      callback(mensajes);
+    });
   }
 }

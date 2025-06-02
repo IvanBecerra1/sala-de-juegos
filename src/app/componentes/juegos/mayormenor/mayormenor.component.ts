@@ -18,6 +18,7 @@ export class MayormenorComponent implements OnInit{
   puntos : number = 0;
   intentos : number = 3;
 
+  mostrarResultado : boolean = false;
   
   public cartaServicio = inject(MayormenorService);
   private resultadoServicio : GuardarResultadoService = inject(GuardarResultadoService);
@@ -61,9 +62,10 @@ export class MayormenorComponent implements OnInit{
 
       if (this.intentos === 0){
         this.mensaje = 'Se te acabaron las vidas!!! tu mayor puntaje fue: ' + this.puntos;
-            
-        this.puntos = 0;
-        this.intentos = 3;
+        
+        this.mostrarResultado = true;
+        //this.puntos = 0;
+       // this.intentos = 3;
 
         return;
       }
@@ -83,8 +85,11 @@ export class MayormenorComponent implements OnInit{
     this.mostrarCargando = false;
 
     if (this.intentos === 0){
-      this.puntos = await this.resultadoServicio.procesoGuardado(this.puntos, "mayorMenor");
-      this.intentos = 3;
+      
+      this.mostrarResultado = true;
+      await this.resultadoServicio.procesoGuardado(this.puntos, "mayorMenor");
+      
+      //this.intentos = 3;
     }
     this.cartaActual = this.nuevaCarta;
     this.valorActual = this.nuevoValor;
@@ -94,5 +99,12 @@ export class MayormenorComponent implements OnInit{
   iniciarTiempo(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
+
+  async reiniciarJuego(){
+    this.mostrarResultado = false;
+    this.puntos = 0;
+    this.intentos = 3;
+  }
+
 
 }

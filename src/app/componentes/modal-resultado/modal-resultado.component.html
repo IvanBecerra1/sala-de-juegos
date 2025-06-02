@@ -1,0 +1,24 @@
+<div class="modal-fondo" *ngIf="mostrar">
+      <div class="modal-contenido text-center">
+        <h2>{{ titulo }}</h2>
+        <p><strong>Puntaje final: {{ puntaje }}</strong></p>
+
+        <div class="d-flex justify-content-around mt-3">
+          <div class="card p-2 text-center" style="width: 8rem;">
+            <h6>Correctas</h6>
+            <p>{{ correctas }}</p>
+          </div>
+          <div class="card p-2 text-center" style="width: 8rem;">
+            <h6>Racha máxima</h6>
+            <p>{{ racha }}</p>
+          </div>
+        </div>
+
+        <p class="mt-2">Categorías jugadas: {{ categorias }}</p>
+
+        <div class="mt-3">
+          <button class="btn btn-secondary me-2" (click)="volver.emit()">Volver al inicio</button>
+          <button class="btn btn-success" (click)="reiniciar.emit()">Jugar de nuevo</button>
+        </div>
+      </div>
+    </div>  

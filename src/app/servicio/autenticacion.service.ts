@@ -7,6 +7,8 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword,signOu
 import { Firestore } from '@angular/fire/firestore';
 import { object } from '@angular/fire/database';
 import { IUsuario } from '../models/interfaces/IUsuario';
+import { Usuario } from '../models/clases/Usuario';
+import { onAuthStateChanged } from '@firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -57,18 +59,22 @@ export class AutenticacionService {
   }
   
 
-  public async obtenerDatosUsuario(): Promise<IUsuario | null> {
-    const usuario = this.fireAuth.currentUser;
-    if (!usuario) {
-      return Promise.reject("No hay un usuario autenticado.");
-    }
-  
-    const refDocumento = doc(this.firestore, AutenticacionService.COLECCION_USUARIOS, usuario.uid);
-    const snapshotUsuario = await getDoc(refDocumento);
-  
-    return snapshotUsuario.exists() ? (snapshotUsuario.data() as IUsuario) : null;
+  public async obtenerDatosUsuario(): Promise<Usuario | null> {
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(this.fireAuth, (firebaseUser) => {
+        if (firebaseUser) {
+          const usuario = new Usuario();
+          usuario.UID = firebaseUser.uid;
+          usuario.CORREO = firebaseUser.email ?? '';
+          usuario.FECHA_REGISTRO = new Date();
+          usuario.ULTIMA_CONEXION = new Date();
+          resolve(usuario);
+        } else {
+          reject("No hay un usuario autenticado.");
+        }
+      });
+    });
   }
-  
   public obtenerUsuario() : User  | null {
     return this.fireAuth.currentUser;
   }
