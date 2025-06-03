@@ -1,11 +1,18 @@
 <mat-toolbar class="navbar-game" >
-  <span>Sala de Juegos</span>
+ 
+  <button mat-button (click)="navegarA('/home')">
+    <img src="../../../assets/icon-gaming.png" alt="Icono de inicio" style="width: 24px; height: 24px; margin-right: 8px;">
+    | Inicio
+
+    
+  <span class="spacer"> | {{this.usuario.CORREO}}</span>
+  </button>
   <span class="spacer"></span>
   
   <button mat-button *ngIf="usuario" (click)="navegarA('/ranking')">Mejores jugadores</button>
   <button mat-button *ngIf="usuario" (click)="navegarA('/quien-soy')">Quien soy?</button>
-  <button mat-button *ngIf="usuario" (click)="navegarA('/encuesta')">Encuesta</button>
-  <button mat-button *ngIf="usuario" (click)="navegarA('/chat')">Chat ONLINE</button>
+  <button mat-button *ngIf="usuarioEncontrado" (click)="navegarA('/encuesta')">Encuesta</button>
+  <button mat-button *ngIf="usuarioEncontrado" (click)="navegarA('/chat')">Chat ONLINE</button>
 
   <button mat-button *ngIf="usuarioEncontrado" (click)="cerrarSesion()">Cerrar Sesión</button>
 

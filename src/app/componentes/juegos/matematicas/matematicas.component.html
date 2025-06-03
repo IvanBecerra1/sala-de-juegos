@@ -7,7 +7,7 @@
     <h3>{{ numero1 }} {{ operador }} {{ numero2 }} = ?</h3>
 
     <div class="d-flex justify-content-center gap-3 mt-4">
-      <button class="btn btn-outline-light" *ngFor="let opcion of opciones" (click)="verificarRespuesta(opcion)">
+      <button [disabled]="this.bloqueado" class="btn btn-outline-light" *ngFor="let opcion of opciones" (click)="verificarRespuesta(opcion)">
         {{ opcion }}
       </button>
     </div>

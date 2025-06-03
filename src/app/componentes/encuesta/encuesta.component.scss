@@ -37,7 +37,7 @@
     padding: 10px 14px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #5e35b1;
     color: white;
     font-size: 14px;
     margin-bottom: 8px;
@@ -50,7 +50,7 @@
   input[type="radio"],
   input[type="checkbox"] {
     margin-right: 8px;
-    accent-color: white;
+    accent-color: #5e35b1;
   }
   
   div[ngIf] {
@@ -81,6 +81,9 @@
     background-color: #5e35b1;
   }
   
+  .letter {
+    color: red;
+  }
   @media screen and (max-width: 768px) {
     .grid-formulario {
       grid-template-columns: 1fr;

@@ -42,17 +42,28 @@ export class MayormenorComponent implements OnInit{
     });
   }
 
-  adivinar(esMayor: boolean) {
+  adivinar(tipo: number) {
     
       this.cartaServicio.extraerCarta(this.idCarta).subscribe( (data: any) => {
       this.nuevaCarta = data.cards[0];
       this.nuevoValor = this.cartaServicio.obtenerValorCarta(this.nuevaCarta.value);
-      const resultado = 
-        esMayor ? 
-          (this.nuevoValor > this.valorActual) 
-        : 
-          (this.nuevoValor < this.valorActual);
 
+      let resultado : boolean  = false;
+
+      switch (tipo) {
+        case 1: {
+          resultado = (this.nuevoValor > this.valorActual);
+          break
+        }
+        case 2: {
+          resultado = (this.nuevoValor == this.valorActual);
+          break; 
+        }
+        case 3: {
+          resultado =(this.nuevoValor < this.valorActual);
+          break;
+        }
+      }
       console.log("carta nueva:");
       console.log(this.nuevaCarta);
       console.log("carta anterior:");

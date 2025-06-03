@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Usuario } from '../../models/clases/Usuario';
 import { AutenticacionService } from '../../servicio/autenticacion.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { EAutenticacion } from '../../models/enumerador/EAutenticacion';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,7 @@ export class NavbarComponent implements OnInit {
 
   private autenticacion : AutenticacionService = inject(AutenticacionService);
   private router : Router = inject(Router);
-
+    private toastr : ToastrService = inject(ToastrService);
 
    ngOnInit(): void {
     this.usuarioEncontrado = this.autenticacion.obtenerUsuario();
@@ -42,6 +44,8 @@ export class NavbarComponent implements OnInit {
       this.usuario.CORREO = "no sesión iniciada";
       this.usuario.UID = "";  
       this.usuarioEncontrado = null;  
+      this.navegarA("/home");
+      this.mostrarMensaje(true, "Se cerro la sesion sastifactoriamente.")
     }).catch((error) =>{
       console.log("(homeComponent.ts) error : ", error);
     });
@@ -50,4 +54,11 @@ export class NavbarComponent implements OnInit {
   navegarA(ruta: string) {
     this.router.navigate([ruta]);
   }
+
+  private mostrarMensaje(exito : boolean, texto : string){
+      exito ? 
+        this.toastr.success(texto, "Sesión de usuario")
+      :
+        this.toastr.error(texto, EAutenticacion.INICIO_SESION_TITULO)
+    }
 }

@@ -25,9 +25,10 @@
         </div>
   
         <div class="mt-4">
-              <button class="btn btn-danger" [disabled]="this.mostrarCargando" (click)="adivinar(false)">Menor</button>
+              <button class="btn btn-danger" [disabled]="this.mostrarCargando" (click)="adivinar(1)">Menor</button>
 
-            <button class="btn btn-primary me-2" [disabled]="this.mostrarCargando" (click)="adivinar(true)">Mayor</button>
+            <button class="btn btn-primary me-2" [disabled]="this.mostrarCargando" (click)="adivinar(2)">Igual</button>
+            <button class="btn btn-primary me-2" [disabled]="this.mostrarCargando" (click)="adivinar(3)">Mayor</button>
         </div>
   
         <div *ngIf="this.mostrarCargando" class="mt-3">

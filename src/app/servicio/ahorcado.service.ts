@@ -10,7 +10,7 @@ export class AhorcadoService {
   private perdidas: number = 0;
   private puntosGanados: number = 0;
 
-  private LISTA_PALABRAS: string[] = ["messi"];
+  private LISTA_PALABRAS: string[] = ["messi", "argentina", "futbol", "gol", "dado", "equipo", "utn", "laboratorio", "angular", "homero"];
   private LETRAS: string[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); 
 
   constructor() {}
@@ -54,6 +54,8 @@ export class AhorcadoService {
   public obtenerPalabraOculta(): string {
     return this.palabraOculta;
   }
+
+  
 
   public obtenerIntentos(): number {
     return this.intentos;

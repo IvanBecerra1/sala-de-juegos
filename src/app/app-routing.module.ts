@@ -21,12 +21,11 @@ const routes: Routes = [
   {
     path: ERutas.HOME,
     component: HomeComponent,
-    canActivateChild: [authJuegosGuard],
     children: [
-      { path: ERutas.AHORCADO, component: AhorcadoComponent },
-      { path: ERutas.PREGUNTADOS, component: PreguntadosComponent },
-      { path: ERutas.MAYORMENOR, component: MayormenorComponent },
-      { path: ERutas.MATEMATICAS, component: MatematicasComponent },
+      {
+        path: '',
+        loadChildren: () => import('./componentes/juegos/juegos.module').then(m => m.JuegosModule)  // Lazy Loading
+      }
     ]
   },
   { path: ERutas.REGISTRO, component: RegistroComponent },

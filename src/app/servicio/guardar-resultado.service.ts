@@ -55,7 +55,7 @@ export class GuardarResultadoService {
       resultadosRef,
       where('juego', '==', nombreJuego),
       orderBy('puntos', 'desc'),
-      limit(15)
+      limit(5)
     );
 
     const snapshot = await getDocs(consulta);

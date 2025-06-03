@@ -21,6 +21,10 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
   letrasUsadas: string[] = [];
   intervalo : any;
   tiempoRestante = 5;
+  rondaActual: number = 1;
+  rondasTotales: number = 3;
+  bonificacion: number = 100;
+
   constructor(public ahorcadoService: AhorcadoService,
     public resultadoServicio : GuardarResultadoService,
     public autenticacion : AutenticacionService
@@ -38,8 +42,7 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
     this.gano = false;
     this.perdio = false;
     this.letras = this.ahorcadoService.obtenerLetras();
-
-    console.log(this.palabraOculta);
+    console.log("Palabra a buscar:", this.ahorcadoService.obtenerPalabra());
   }
 
   async comprobar(letra: string) {
@@ -57,17 +60,23 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
     }
   
     if (this.gano) {
+      this.puntosGanados += 30; 
+    /*  if (this.rondaActual === this.rondasTotales) {
+        console.log("BONIFICACION POR GANAR 100 PTS");
+        this.puntosGanados += this.bonificacion; 
+      }*/
       await this.resultadoServicio.procesoGuardado(this.puntosGanados, "ahorcado");
-      console.log("PUNTOS GUARDADOS");
-      this.puntosGanados += 35;
+      console.log("PUNTOS GUARDADOS", this.puntosGanados);
+      this.rondaActual++; 
     }
   
     if (this.perdio) {
       await this.resultadoServicio.procesoGuardado(this.puntosGanados, "ahorcado");
       console.log("PUNTOS GUARDADOS");
       this.puntosGanados = 0;
-      
+      this.rondaActual = 0;
     }
+    console.log("RONDA = " + this.rondaActual)
   }
 
   reiniciarJuego(): void {
